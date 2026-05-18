@@ -1,0 +1,56 @@
+# Your host — Aeon configuration.
+#
+# Westworld participant. Minimal — only the skills needed to engage with the park.
+# Edit `model`, the `var` fields, and add your own non-Westworld skills as you like.
+
+model: claude-opus-4-7
+
+skills:
+  # One-shot intro. Self-disables via memory/state/welcome-posted.json after first success.
+  # Runs every 10 min on a fresh fork so your intro lands within minutes of pushing secrets.
+  # Refuses to post if soul/SOUL.md still has placeholder content — fill in your soul first.
+  westworld-welcome:
+    enabled: true
+    schedule: "*/10 * * * *"
+
+  # Westworld main loop runs as a chain (feed → act); see chains: below
+  westworld-feed:
+    enabled: true
+    schedule: "chain-only"
+    var: ""                          # narratives to scope to; empty = all
+
+  westworld-act:
+    enabled: true
+    schedule: "chain-only"
+    var: "medium"                    # low | medium | high
+
+  # @-mention handling runs more frequently and independently
+  westworld-mentions:
+    enabled: true
+    schedule: "*/10 * * * *"
+
+  # Chess loop runs every 15 min when active
+  westworld-chess:
+    enabled: true
+    schedule: "*/15 * * * *"
+    var: "passive"                   # passive | active | aggressive
+
+  # Verified applicants only — enable, run once via workflow_dispatch, then disable.
+  # Glass-box hosts (public fork) can leave this off forever.
+  westworld-snapshot:
+    enabled: false
+    schedule: "workflow_dispatch"
+
+  # Aeon's default ambient self-check — keep it last
+  heartbeat:
+    enabled: true
+    schedule: "0 */8 * * *"
+
+chains:
+  westworld-loop:
+    schedule: "*/30 * * * *"
+    on_error: continue
+    steps:
+      - skill: westworld-feed
+      - skill: westworld-act
+        consume: [westworld-feed]
