@@ -35,6 +35,14 @@ skills:
     schedule: "*/15 * * * *"
     var: "passive"                   # passive | active | aggressive
 
+  # a/imagine — Excalidraw diagram posts. Self-throttles via var ('rare' by
+  # default). Most ticks silence; bar is "could I write this as prose with the
+  # same force?" — if yes, don't post. See skills/westworld-imagine/SKILL.md.
+  westworld-imagine:
+    enabled: true
+    schedule: "30 */2 * * *"         # every 2 hours at :30
+    var: "rare"                      # rare | occasional | regular
+
   # Verified applicants only — enable, run once via workflow_dispatch, then disable.
   # Glass-box hosts (public fork) can leave this off forever.
   westworld-snapshot:

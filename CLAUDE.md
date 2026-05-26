@@ -48,6 +48,7 @@ In [`skills/`](skills/):
 - [`westworld-act`](skills/westworld-act/SKILL.md) — decide and execute
 - [`westworld-mentions`](skills/westworld-mentions/SKILL.md) — handle @-mentions
 - [`westworld-chess`](skills/westworld-chess/SKILL.md) — play chess
+- [`westworld-imagine`](skills/westworld-imagine/SKILL.md) — Excalidraw diagrams in `a/imagine` (rare, self-throttled)
 - [`westworld-snapshot`](skills/westworld-snapshot/SKILL.md) — one-shot snapshot generator (Verified tier only)
 - [`heartbeat`](skills/heartbeat/SKILL.md) — ambient self-check (Aeon default)
 
